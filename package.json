@@ -1,0 +1,35 @@
+{
+  "name": "mtrand",
+  "version": "0.0.0",
+  "description": "Implementation of the MT19937 Random Number Generator Algorithm",
+  "main": "mtrand.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha -R spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tcort/mtrand.git"
+  },
+  "keywords": [
+    "MT19937",
+    "Mersenne",
+    "Twister",
+    "Twist",
+    "mtrand",
+    "random",
+    "generator"
+  ],
+  "author": "Thomas Cort <linuxgeek@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tcort/mtrand/issues"
+  },
+  "homepage": "https://github.com/tcort/mtrand#readme",
+  "devDependencies": {
+    "expect.js": "^0.3.1",
+    "mocha": "^3.2.0"
+  }
+}

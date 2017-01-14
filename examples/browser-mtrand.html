@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset=utf-8 />
+    <title>mtrand example</title>
+</head>
+<body>
+    Here are some random numbers: <ul id="results"></ul>
+
+    <script src="../mtrand.js"></script>
+    <script>
+        const seed = 0xC0FFEE;
+        const rng = mtrand(seed);
+
+        for (let i = 0; i < 10; i++) {
+            const li = document.createElement("LI");
+            const val = document.createTextNode(rng.next().value);
+            li.appendChild(val);
+            document.getElementById("results").appendChild(li);
+        }
+    </script>
+</body>
+</html>
