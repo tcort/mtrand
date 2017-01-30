@@ -13,4 +13,11 @@ describe('mtrand', function () {
         }
         expect(output).to.eql(require('./expected.output.js'));
     });
+
+    it('should accept an upper_bound', function () {
+        const rng = mtrand(0xC0FFEE, 6);
+        for (let i = 0; i < 1000; i++) {
+            expect(rng.next().value).to.be.lessThan(6);
+        }
+    });
 });
