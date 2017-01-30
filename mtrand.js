@@ -7,7 +7,7 @@
         return (new Uint32Array([n]))[0];
     }
 
-    function *mtrand(seed) {
+    function *_mtrand(seed) {
 
         // algorithm parameters
         const W =  32;
@@ -61,6 +61,29 @@
             }
         } while (true);
 
+    }
+
+    function *_mtrand_uniform(seed, upper_bound) {
+
+        const MTRAND_MAX = 0xFFFFFFFF;
+        const limit = MTRAND_MAX - (((MTRAND_MAX % upper_bound) + 1) % upper_bound);
+
+        const rng = mtrand(seed);
+        do {
+            const n = rng.next().value;
+            if (n > limit) {
+                continue;
+            }
+            yield n % upper_bound;
+        } while (true);
+    }
+
+    function mtrand(seed, upper_bound) {
+        if (arguments.length === 2) {
+            return _mtrand_uniform(seed, upper_bound);
+        } else {
+            return _mtrand(seed);
+        }
     }
 
     if (typeof module === "object" && module && typeof module.exports === "object") {

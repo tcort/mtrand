@@ -18,6 +18,17 @@ Return value:
 
 * [Generator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator)
 
+### **function* mtrand(seed, upper_bound)**
+
+Parameters:
+
+* `seed` 32-bit unsigned integer value to use as the seed.
+* `upper_bound` all results will be less than this number.
+
+Return value:
+
+* [Generator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator)
+
 ## Examples
 
 `node.js`:
@@ -44,16 +55,16 @@ for (let i = 0; i < 10; i++) {
     <title>mtrand example</title>
 </head>
 <body>
-    Here are some random numbers: <ul id="results"></ul>
+    Here are some random dice rolls: <ul id="results"></ul>
 
     <script src="mtrand.js"></script>
     <script>
         const seed = 0xC0FFEE;
-        const rng = mtrand(seed);
-
+        const rng = mtrand(seed, 6);
+        const faces = [ '\u2680', '\u2681', '\u2682', '\u2683', '\u2684', '\u2685' ];
         for (let i = 0; i < 10; i++) {
             const li = document.createElement("LI");
-            const val = document.createTextNode(rng.next().value);
+            const val = document.createTextNode(faces[rng.next().value]);
             li.appendChild(val);
             document.getElementById("results").appendChild(li);
         }
