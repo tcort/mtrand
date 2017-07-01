@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset=utf-8 />
+    <title>Coin Flip</title>
+    <style>
+        #last-flip {
+            color: #ff0000
+        }
+    </style>
+</head>
+<body>
+    <button onclick="flip()">Flip</button>
+    <div id="streak"></div>
+    <div id="flips"></div>
+    <script src="../mtrand.js"></script>
+    <script>
+        const seed = window.crypto.getRandomValues(new Uint32Array(1))[0];
+        const rng = mtrand(seed, 2);
+        const faces = [ 'heads', 'tails' ];
+        const flips = [];
+
+        function flip() {
+            flips.unshift(rng.next().value);
+            document.getElementById("flips").innerHTML = flips.map(flip => faces[flip]).map((flip, i, arr) => i === 0 ? `<span id="last-flip">${flip}</span>` : flip ).join(', ');
+            const streak = flips.reduce((streak, flip, i, flips) => {
+                if (flip === 0) {
+                    streak.current++;
+                }
+                if (flip === 1 || flips.length - 1 === i) { // ending streak?
+                    streak.longest = Math.max(streak.longest, streak.current);
+                    streak.current = 0;
+                }
+                return (flips.length - 1 === i) ? streak.longest : streak;
+            }, { longest: 0, current: 0 });
+            document.getElementById("streak").innerHTML = `Longest streak of heads: ${streak}`;
+        }
+    </script>
+</body>
+</html>
